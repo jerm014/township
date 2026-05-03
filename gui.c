@@ -129,21 +129,15 @@ static void load_bitmaps(void) {
             continue;
         }
 
-        char bmp_name[MAX_IMAGE_NAME + 4];
-        strncpy(bmp_name, img, MAX_IMAGE_NAME);
-        bmp_name[MAX_IMAGE_NAME] = '\0';
-        char *ext = strstr(bmp_name, ".webp");
-        if (ext) strcpy(ext, ".bmp");
-
         char clean_name[MAX_IMAGE_NAME + 4];
         int ci = 0;
-        for (int j = 0; bmp_name[j] && ci < (int)sizeof(clean_name) - 1; j++) {
-            if (bmp_name[j] == '%' && bmp_name[j+1] == '3' &&
-                (bmp_name[j+2] == 'F' || bmp_name[j+2] == 'f')) {
+        for (int j = 0; img[j] && ci < (int)sizeof(clean_name) - 1; j++) {
+            if (img[j] == '%' && img[j+1] == '3' &&
+                (img[j+2] == 'F' || img[j+2] == 'f')) {
                 clean_name[ci++] = '_';
                 j += 2;
             } else {
-                clean_name[ci++] = bmp_name[j];
+                clean_name[ci++] = img[j];
             }
         }
         clean_name[ci] = '\0';
